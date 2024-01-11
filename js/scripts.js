@@ -6,6 +6,7 @@ createApp({
     data() {
         return {
             activeContact: 0,
+            newMessage: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -171,9 +172,24 @@ createApp({
             ]  
         };
     },
-    methods:{
-        prova(){
-            alert("ciao")
+    methods: {
+        sendMessage(){
+            if(this.newMessage.trim().length > 0){
+               this.contacts[this.activeContact].messages.push({
+                date: '10/01/2020 15:51:00',
+                message: this.newMessage,
+                status: 'sent'
+                })
+            }
+            this.newMessage = "";
+            setTimeout(() => this.receivedMessage(), 1000);
+        },
+        receivedMessage(){
+            this.contacts[this.activeContact].messages.push({
+                date: '10/01/2020 15:51:00',
+                message: 'ok',
+                status: 'received'
+            })
         }
     }
   // Monto l'istanza di Vue in pagina
