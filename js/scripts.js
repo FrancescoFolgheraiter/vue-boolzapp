@@ -167,10 +167,13 @@ createApp({
                         }
                     ],
                 }
-            ]
-            
-            
+            ]  
         };
+    },
+    methods:{
+        prova(){
+            alert("ciao")
+        }
     }
   // Monto l'istanza di Vue in pagina
 }).mount('#app');

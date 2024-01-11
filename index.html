@@ -14,7 +14,7 @@
         <!-- Importazione Vue -->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </head>
-    <body class="debug">
+    <body>
         <!--app vue-->   
         <div id="app">
             <!--header di sfondo-->
@@ -25,7 +25,7 @@
             <!--inizio main di sfondo-->
             <main>
                 <div class="container app">
-                    <div class="row g-0 h-100">
+                    <div class="row g-0 h-100 border">
                         <div class="col-4 h-100 d-flex flex-column">
                             <section class="header-app d-flex justify-content-between align-items-center">
                                 <div class="container-avatar">
@@ -35,9 +35,9 @@
                                     Sofia
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-circle-notch"></i>
-                                    <i class="fa-solid fa-message"></i>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    <i class="fa-solid fa-circle-notch fa-xl p-2"></i>
+                                    <i class="fa-solid fa-message fa-xl p-2"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical fa-xl p-2"></i>
                                 </div>
                             </section>
                             <div class="notification d-flex align-items-center">
@@ -59,11 +59,11 @@
                                 <div class="search-chat">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text rounded-start-1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                        <input type="text" class="form-control rounded-end-1" placeholder="Cerca o inizia una nuova chat">
+                                        <input type="text" class="form-control rounded-end-1 " placeholder="Cerca o inizia una nuova chat">
                                       </div>
                                 </div>
                                 <ul>
-                                    <li v-for="(contact,i) in contacts" class="d-flex justify-content-between">
+                                    <li v-for="(contact, i) in contacts" class = "d-flex justify-content-between" :class="(i==0)? 'active':''">
                                         <div class="container-avatar">
                                             <img :src="contact.avatar" :alt="contact.name">
                                         </div>
@@ -86,20 +86,40 @@
                                     {{contacts[0].name}}
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <i class="fa-solid fa-paperclip"></i>
-                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    <i class="fa-solid fa-magnifying-glass fa-xl p-2"></i>
+                                    <i class="fa-solid fa-paperclip fa-xl p-2"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical fa-xl p-2"></i>
                                 </div>
                             </section>
-                            <section class="main-app flex-grow-1">
-                                <div class="row">
-                                    <div class="col-10">
-
+                            <section class="main-app flex-grow-1 p-3">
+                                <div class="row g-0">
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <div class="card-message sent">
+                                            {{contacts[0].messages[0].message}}
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-12 mb-3 d-flex justify-content-end">
+                                        <div class="card-message sent">
+                                            {{contacts[0].messages[1].message}}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <div class="card-message received">
+                                            {{contacts[0].messages[2].message}}
+                                        </div>
+                                    </div>
+                                </div>    
                             </section>
-                            <section class="footer-app">
-
+                            <section class="footer-app d-flex justify-content-between align-items-center">
+                                <div class="p-3">
+                                    <i class="fa-regular fa-face-smile fa-xl"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <input type="text" name="" class="w-100 form-control rounded-end-1" placeholder="Scrivi un messaggio">
+                                </div>
+                                <div class="p-3">
+                                    <i class="fa-solid fa-microphone fa-xl"></i>
+                                </div>
                             </section>
                         </div>
                     </div>
