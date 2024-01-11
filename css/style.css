@@ -42,34 +42,37 @@ main{
     position: relative;
     background-color: var(--active-color);
 }
-.main-app{
+.app{
+    height:calc(100vh - 60px);
     position: absolute;
     top:-150px;
     left:50%;
     transform:translateX(-50%);
 }
-.main-app>:first-child{
-    height:100%;
-}
+
 
 .header-app{
     height:var(--height-headerapp);
     background-color: var(--active-color);
 }
-
-.address-book{
-    height:calc(100vh - (var(--height-headerapp) - var(--height-notification)));
+.notification{
+    height: var(--height-notification);
+    background-color: var(--notification-color);
+}
+.main-app{
+    background-image: url(../img/mine.jpg);
 }
 
-/*
-    FOOTER
-*/
+.footer-app{
+    height: 50px;
+    background-color: var(--footer-color);
+}
 
 
 /*DEBUG*/
 .debug .container{
     background-color: lightgreen;
-    height:calc(100vh - 60px);
+    
     margin-top:30px;
     margin-bottom:30px;
     border:5px dashed black;
