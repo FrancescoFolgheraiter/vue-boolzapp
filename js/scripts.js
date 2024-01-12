@@ -7,6 +7,7 @@ createApp({
         return {
             activeContact: 0,
             newMessage: '',
+            whoFind: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -190,6 +191,27 @@ createApp({
                 message: 'ok',
                 status: 'received'
             })
+        },
+        searchContact(){
+            //reset all obj visible true
+            if(this.whoFind.trim()==""){
+                for (let i = 0; i < this.contacts.length; i++) {
+                    this.contacts[i].visible = true;
+                }
+            }
+            else{
+                //ricerca parola
+                for (let i = 0; i < this.contacts.length; i++) {
+                    const name = this.contacts[i].name;
+                    for (let j = 0; j < this.whoFind.length; j++) {
+                        if(this.whoFind[j] == name[j]){
+                            this.contacts[i].visible = false;
+                        }
+                    }
+                }
+            }
+            console.log(this.whoFind)
+            console.log(this.contacts)     
         }
     }
   // Monto l'istanza di Vue in pagina

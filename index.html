@@ -59,7 +59,7 @@
                                 <div class="search-chat">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text rounded-start-1"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                        <input type="text" class="form-control rounded-end-1 " placeholder="Cerca o inizia una nuova chat">
+                                        <input type="text" class="form-control rounded-end-1 " placeholder="Cerca o inizia una nuova chat" @keyup="searchContact()" v-model="whoFind">
                                       </div>
                                 </div>
                                 <ul>
