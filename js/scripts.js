@@ -193,25 +193,29 @@ createApp({
             })
         },
         searchContact(){
+            
             //reset all obj visible true
             if(this.whoFind.trim()==""){
                 for (let i = 0; i < this.contacts.length; i++) {
                     this.contacts[i].visible = true;
                 }
             }
-            else{
+            else{ 
                 //ricerca parola
                 for (let i = 0; i < this.contacts.length; i++) {
-                    const name = this.contacts[i].name;
-                    for (let j = 0; j < this.whoFind.length; j++) {
-                        if(this.whoFind[j] == name[j]){
-                            this.contacts[i].visible = false;
-                        }
+                    const name = this.contacts[i].name.toUpperCase();
+                    this.whoFind = this.whoFind.toUpperCase()
+                    //imposto visible di tutti gli oggetti a false
+                    if(name.includes(this.whoFind)){
+                        this.contacts[i].visible=true;
                     }
+                    else{
+                        this.contacts[i].visible=false;
+                    }
+                    console.log(this.contacts[i])
+                    console.log(name.includes(this.whoFind))
                 }
             }
-            console.log(this.whoFind)
-            console.log(this.contacts)     
         }
     }
   // Monto l'istanza di Vue in pagina

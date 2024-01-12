@@ -63,15 +63,17 @@
                                       </div>
                                 </div>
                                 <ul>
-                                    <li v-for="(contact, i) in contacts" class = "d-flex justify-content-between" :class="(i==activeContact)? 'active':''" @click="activeContact=i">
-                                        <div class="container-avatar">
-                                            <img :src="contact.avatar" :alt="contact.name">
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            {{contact.name}}
-                                        </div>
-                                        <div>
-                                            12.00
+                                    <li v-for="(contact, i) in contacts"  :class="(i==activeContact)? 'active':''" @click="activeContact=i">
+                                        <div v-if="(contact.visible==true)" class = "d-flex justify-content-between">
+                                            <div class="container-avatar">
+                                                <img :src="contact.avatar" :alt="contact.name">
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                {{contact.name}}
+                                            </div>
+                                            <div>
+                                                12.00
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
@@ -93,8 +95,10 @@
                             </section>
                             <section class="main-app flex-grow-1 p-3">
                                 <div class="row g-0">
-                                    <div v-for="(elem, i) in contacts[activeContact].messages" class="col-12 mb-3 d-flex justify-content-end">
-                                        <div class="card-message" :class="(contacts[activeContact].messages[i].status ==='sent') ? 'sent':'received' " >
+                                    <div v-for="(elem, i) in contacts[activeContact].messages" class="col-12 mb-3 d-flex" :class="{
+                                        'justify-content-end': contacts[activeContact].messages[i].status =='sent'
+                                    }" >
+                                        <div class="card-message" :class="(contacts[activeContact].messages[i].status =='sent') ? 'sent':'received' " >
                                             {{contacts[activeContact].messages[i].message}}
                                         </div>
                                     </div>
