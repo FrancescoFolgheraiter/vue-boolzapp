@@ -8,6 +8,7 @@ createApp({
             activeContact: 0,
             newMessage: '',
             whoFind: '',
+            showOption: [],
             contacts: [
                 {
                     name: 'Michele',
@@ -214,9 +215,21 @@ createApp({
                 }
             }
         },
+        activeOption(index){
+            this.showOption = [];
+            for (let j = 0; j < this.contacts[this.activeContact].messages.length; j++) {
+               this.showOption.push(false);
+            }
+            this.showOption[index] = true;
+        },
         deleteMessage(index){
             this.contacts[this.activeContact].messages.splice(index, 1)
         }
+    },
+    mounted(){
+        setInterval(() => {
+            this.showOption=[];
+        }, 3000)
     }
   // Monto l'istanza di Vue in pagina
 }).mount('#app');

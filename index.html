@@ -98,9 +98,16 @@
                                     <div v-for="(elem, i) in contacts[activeContact].messages" class="col-12 mb-3 d-flex" :class="{
                                         'justify-content-end': contacts[activeContact].messages[i].status =='sent'
                                     }" >
-                                        <div class="card-message" :class="(contacts[activeContact].messages[i].status =='sent') ? 'sent':'received' " >
-                                            {{contacts[activeContact].messages[i].message}}
-                                            <div class="card-option p-3">
+                                        <div class="card-message" :class="(contacts[activeContact].messages[i].status =='sent') ? 'sent':'received' " @click="activeOption(i)">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    {{contacts[activeContact].messages[i].message}}
+                                                </div>
+                                                <div>
+                                                    <i class="fa-solid fa-gear"></i>
+                                                </div>
+                                            </div>
+                                            <div class="card-option p-3" v-show="showOption[i]">
                                                 <div class="border-bottom pb-1 mb-1">Message info</div>
                                                 <div class="" @click="deleteMessage(i)">Delete message</div>
                                             </div>
