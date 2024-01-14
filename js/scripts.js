@@ -192,8 +192,7 @@ createApp({
                 status: 'received'
             })
         },
-        searchContact(){
-            
+        searchContact(){      
             //reset all obj visible true
             if(this.whoFind.trim()==""){
                 for (let i = 0; i < this.contacts.length; i++) {
@@ -203,8 +202,8 @@ createApp({
             else{ 
                 //ricerca parola
                 for (let i = 0; i < this.contacts.length; i++) {
-                    const name = this.contacts[i].name.toUpperCase();
-                    this.whoFind = this.whoFind.toUpperCase()
+                    const name = this.contacts[i].name.toLowerCase();
+                    this.whoFind = this.whoFind.toLowerCase()
                     //imposto visible di tutti gli oggetti a false
                     if(name.includes(this.whoFind)){
                         this.contacts[i].visible=true;
@@ -212,10 +211,11 @@ createApp({
                     else{
                         this.contacts[i].visible=false;
                     }
-                    console.log(this.contacts[i])
-                    console.log(name.includes(this.whoFind))
                 }
             }
+        },
+        deleteMessage(index){
+            this.contacts[this.activeContact].messages.splice(index, 1)
         }
     }
   // Monto l'istanza di Vue in pagina
