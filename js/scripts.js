@@ -175,10 +175,21 @@ createApp({
         };
     },
     methods: {
+        createDate(){
+            const dateMsg = new Date();
+            const year = dateMsg.getFullYear();
+            const month = dateMsg.getMonth() + 1;
+            const day = dateMsg.getDate();
+            const hours = dateMsg.getHours();
+            const minuts = dateMsg.getMinutes();
+            const seconds = dateMsg.getSeconds();
+            return("'" + day + "/" + month + "/"+ "/"+ year + " "+ hours + ":" + minuts + ":" + seconds + "'")
+        },
         sendMessage(){
+            
             if(this.newMessage.trim().length > 0){
                this.contacts[this.activeContact].messages.push({
-                date: '10/01/2020 15:51:00',
+                date: this.createDate(),
                 message: this.newMessage,
                 status: 'sent'
                 })
@@ -188,7 +199,7 @@ createApp({
         },
         receivedMessage(){
             this.contacts[this.activeContact].messages.push({
-                date: '10/01/2020 15:51:00',
+                date: this.createDate(),
                 message: 'ok',
                 status: 'received'
             })
@@ -224,6 +235,27 @@ createApp({
         },
         deleteMessage(index){
             this.contacts[this.activeContact].messages.splice(index, 1)
+        },
+        lastMessage(index){
+            const lastObjMessage = this.contacts[index].messages[this.contacts[index].messages.length - 1];
+            return lastObjMessage.message
+        },
+        timeLastMessage(index){
+            //salvataggio ultimo messaggio 
+            const lastObjMessage = this.contacts[index].messages[this.contacts[index].messages.length - 1];
+            //estrapolazione data
+            const date = lastObjMessage.date;
+            //rompo la data in un array di 2 elementi
+            const time = date.split(" ");
+            //recupero la parte con ora:minuti:secondi
+            const hour = time[1];
+            const arraySupport = [];
+            //ciclo per recuperare solo i minuti e le ore
+            for (let j = 0; j < 5; j++) {
+                arraySupport.push(hour[j])
+            }
+            //restituisco la stringa che mi occorre
+            return arraySupport.join("")
         }
     },
     mounted(){

@@ -81,7 +81,7 @@ main{
     background-color: var(--notification-color);
 }
 
-.belt{
+.bell{
     color: var(--notification-color);
     line-height: 50px;
     vertical-align: middle;
@@ -90,10 +90,12 @@ main{
 
 .address-book{
     background-color: white;
+    overflow-y: auto;
 }
 
 .main-app{
     background-image: url(../img/mine.jpg);
+    overflow-y: auto;
 }
 
 .footer-app{

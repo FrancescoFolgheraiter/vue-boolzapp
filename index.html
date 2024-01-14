@@ -41,7 +41,7 @@
                                 </div>
                             </section>
                             <div class="notification d-flex align-items-center">
-                                <div class="container-avatar bg-white belt ms-3">
+                                <div class="container-avatar bg-white bell ms-3 me-3">
                                     <i class="fa-solid fa-bell-slash fa-xl"></i>
                                 </div>
                                 <div>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <section class="address-book flex-grow-1">
-                                <div class="search-chat">
+                                <div class="search-chat m-1">
                                     <div class="input-group flex-nowrap">
                                         <span class="input-group-text rounded-start-1"><i class="fa-solid fa-magnifying-glass"></i></span>
                                         <input type="text" class="form-control rounded-end-1 " placeholder="Cerca o inizia una nuova chat" @keyup="searchContact()" v-model="whoFind">
@@ -64,15 +64,20 @@
                                 </div>
                                 <ul>
                                     <li v-for="(contact, i) in contacts"  :class="(i==activeContact)? 'active':''" @click="activeContact=i">
-                                        <div v-if="(contact.visible==true)" class = "d-flex justify-content-between">
+                                        <div v-if="(contact.visible==true)" class = "d-flex justify-content-between p-2">
                                             <div class="container-avatar">
                                                 <img :src="contact.avatar" :alt="contact.name">
                                             </div>
                                             <div class="flex-grow-1">
-                                                {{contact.name}}
+                                                <div>
+                                                    {{contact.name}}
+                                                </div>
+                                                <div>
+                                                    {{lastMessage(i)}}
+                                                </div>
                                             </div>
                                             <div>
-                                                12.00
+                                                {{timeLastMessage(i)}}
                                             </div>
                                         </div>
                                     </li>
@@ -82,10 +87,10 @@
                         <div class="col-8 h-100 d-flex flex-column">
                             <section class = "header-app d-flex justify-content-between align-items-center">
                                 <div class = "container-avatar">
-                                    <img :src="contacts[0].avatar" alt="">
+                                    <img :src="contacts[activeContact].avatar" :alt="contacts[activeContact].name">
                                 </div>
                                 <div class = "flex-grow-1">
-                                    {{contacts[0].name}}
+                                    {{contacts[activeContact].name}}
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-magnifying-glass fa-xl p-2"></i>
@@ -99,7 +104,7 @@
                                         'justify-content-end': contacts[activeContact].messages[i].status =='sent'
                                     }" >
                                         <div class="card-message" :class="(contacts[activeContact].messages[i].status =='sent') ? 'sent':'received' " @click="activeOption(i)">
-                                            <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-between flex-wrap">
                                                 <div>
                                                     {{contacts[activeContact].messages[i].message}}
                                                 </div>
