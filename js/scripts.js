@@ -9,6 +9,7 @@ createApp({
             newMessage: '',
             whoFind: '',
             showOption: [],
+            newAnswer:'',
             emoji:[
                 '&#128512',
                 '&#128513',
@@ -219,13 +220,14 @@ createApp({
                 status: 'sent'
                 })
                 setTimeout(() => this.receivedMessage(), 1000);
+                this.newMessage = "";
+                this.wordGenerator();
             }
-            this.newMessage = "";
         },
         receivedMessage(){
             this.contacts[this.activeContact].messages.push({
                 date: this.createDate(),
-                message: 'ok',
+                message: this.newAnswer,
                 status: 'received'
             })
         },
@@ -291,12 +293,17 @@ createApp({
             //restituisco la stringa che mi occorre
             return arraySupport.join("")
             
-        }
+        },
+        wordGenerator(){
+            axios.get("https://flynn.boolean.careers/exercises/api/random/sentence").then((result) => {
+               this.newAnswer = result.data.response;
+        });
+        } 
     },
     mounted(){
         setInterval(() => {
             this.showOption=[];
-        }, 3000)
+        }, 3000);
     }
   // Monto l'istanza di Vue in pagina
 }).mount('#app');
