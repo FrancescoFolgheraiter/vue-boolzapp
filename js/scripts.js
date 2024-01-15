@@ -221,7 +221,7 @@ createApp({
                 })
                 setTimeout(() => this.receivedMessage(), 1000);
                 this.newMessage = "";
-                this.wordGenerator();
+                this.wordsGenerator();
             }
         },
         receivedMessage(){
@@ -294,7 +294,7 @@ createApp({
             return arraySupport.join("")
             
         },
-        wordGenerator(){
+        wordsGenerator(){
             axios.get("https://flynn.boolean.careers/exercises/api/random/sentence").then((result) => {
                this.newAnswer = result.data.response;
         });

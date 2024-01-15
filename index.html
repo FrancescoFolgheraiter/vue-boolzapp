@@ -135,7 +135,8 @@
                                     <input type="text" name="" class="w-100 form-control rounded-end-1" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage()">
                                 </div>
                                 <div class="p-3">
-                                    <i class="fa-solid fa-microphone fa-xl"></i>
+                                    <i class="fa-solid fa-microphone" v-if="newMessage.length <= 0"></i>
+                                    <i class="fa-solid fa-paper-plane" v-if="newMessage.length > 0" @click="sendMessage()"></i>
                                 </div>
                             </section>
                         </div>
