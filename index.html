@@ -64,7 +64,7 @@
                                 </div>
                                 <ul>
                                     <li v-for="(contact, i) in contacts"  :class="(i==activeContact)? 'active':''" @click="activeContact=i">
-                                        <div v-if="(contact.visible==true)" class = "d-flex justify-content-between p-2">
+                                        <div v-if="(contact.visible==true)" class = "d-flex justify-content-between p-2 border-bottom">
                                             <div class="container-avatar">
                                                 <img :src="contact.avatar" :alt="contact.name">
                                             </div>
@@ -85,7 +85,7 @@
                             </section>
                         </div>
                         <div class="col-8 h-100 d-flex flex-column">
-                            <section class = "header-app d-flex justify-content-between align-items-center">
+                            <section class = "header-app d-flex justify-content-between align-items-center border-start">
                                 <div class = "container-avatar">
                                     <img :src="contacts[activeContact].avatar" :alt="contacts[activeContact].name">
                                 </div>
@@ -103,10 +103,10 @@
                                     <div v-for="(elem, i) in contacts[activeContact].messages" class="col-12 mb-3 d-flex" :class="{
                                         'justify-content-end': contacts[activeContact].messages[i].status =='sent'
                                     }" >
-                                        <div class="card-message" :class="(contacts[activeContact].messages[i].status =='sent') ? 'sent':'received' " @click="activeOption(i)">
+                                        <div class="card-message" :class="elem.status" @click="activeOption(i)">
                                             <div class="d-flex justify-content-between flex-wrap">
                                                 <div>
-                                                    {{contacts[activeContact].messages[i].message}}
+                                                    {{elem.message}}
                                                 </div>
                                                 <div>
                                                     <i class="fa-solid fa-gear"></i>
@@ -121,8 +121,13 @@
                                 </div>    
                             </section>
                             <section class="footer-app d-flex justify-content-between align-items-center">
-                                <div class="p-3">
+                                <div class="position-relative p-3" @click="flagEmoji=!flagEmoji">
                                     <i class="fa-regular fa-face-smile fa-xl"></i>
+                                    <div class="emoji" v-if="(flagEmoji)">
+                                        <div class="row">
+                                            <div v-for="(elem, i) in emoji" class="col-1" v-html="emoji[i]"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="flex-grow-1">
                                     <input type="text" name="" class="w-100 form-control rounded-end-1" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage()">

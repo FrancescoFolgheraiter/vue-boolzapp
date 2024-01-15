@@ -9,6 +9,22 @@ createApp({
             newMessage: '',
             whoFind: '',
             showOption: [],
+            emoji:[
+                '&#128512',
+                '&#128513',
+                '&#128514',
+                '&#128515',
+                '&#128516',
+                '&#128517',
+                '&#128518',
+                '&#128519',
+                '&#128520',
+                '&#128521',
+                '&#128522',
+                '&#128523',
+                '&#128524',
+            ],
+            flagEmoji: false,
             contacts: [
                 {
                     name: 'Michele',
@@ -184,6 +200,7 @@ createApp({
             const hours = this.checkDouble(dateMsg.getHours());
             const minuts = this.checkDouble(dateMsg.getMinutes());
             const seconds = this.checkDouble(dateMsg.getSeconds());
+            //potevo usare la funzione stringa.padstart(2, 0) per aggiungere 0
             return("'" + day + "/" + month + "/"+ "/"+ year + " "+ hours + ":" + minuts + ":" + seconds + "'")
         },
         //controllo dato in input una parte della data che sia doppia cifra
@@ -201,9 +218,9 @@ createApp({
                 message: this.newMessage,
                 status: 'sent'
                 })
+                setTimeout(() => this.receivedMessage(), 1000);
             }
             this.newMessage = "";
-            setTimeout(() => this.receivedMessage(), 1000);
         },
         receivedMessage(){
             this.contacts[this.activeContact].messages.push({
@@ -236,15 +253,20 @@ createApp({
         },
         //funzione che mi permette di visualizzare l'opzione delete
         activeOption(index){
-            this.showOption = [];
-            for (let j = 0; j < this.contacts[this.activeContact].messages.length; j++) {
-               this.showOption.push(false);
+            if( index > 0){
+                this.showOption = [];
+                for (let j = 0; j < this.contacts[this.activeContact].messages.length; j++) {
+                   this.showOption.push(false);
+                }
+                this.showOption[index] = true;
             }
-            this.showOption[index] = true;
         },
         //cancello il messaggio dall'array
         deleteMessage(index){
-            this.contacts[this.activeContact].messages.splice(index, 1)
+            this.contacts[this.activeContact].messages.splice(index, 1);
+            this.showOption.splice(index,1);
+            console.log("show option", this.showOption);
+            console.log(" array contacts",this.contacts[this.activeContact].messages)
         },
         //estrapolo l'ultimo messaggio del contatto da vedere in rubrica
         lastMessage(index){
@@ -268,6 +290,7 @@ createApp({
             }
             //restituisco la stringa che mi occorre
             return arraySupport.join("")
+            
         }
     },
     mounted(){
