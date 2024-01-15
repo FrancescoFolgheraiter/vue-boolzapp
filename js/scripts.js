@@ -175,18 +175,26 @@ createApp({
         };
     },
     methods: {
+        //creo una data prendendola dall'oggetto new Date
         createDate(){
             const dateMsg = new Date();
             const year = dateMsg.getFullYear();
-            const month = dateMsg.getMonth() + 1;
-            const day = dateMsg.getDate();
-            const hours = dateMsg.getHours();
-            const minuts = dateMsg.getMinutes();
-            const seconds = dateMsg.getSeconds();
+            const month = this.checkDouble(dateMsg.getMonth() + 1);
+            const day = this.checkDouble(dateMsg.getDate());
+            const hours = this.checkDouble(dateMsg.getHours());
+            const minuts = this.checkDouble(dateMsg.getMinutes());
+            const seconds = this.checkDouble(dateMsg.getSeconds());
             return("'" + day + "/" + month + "/"+ "/"+ year + " "+ hours + ":" + minuts + ":" + seconds + "'")
         },
-        sendMessage(){
-            
+        //controllo dato in input una parte della data che sia doppia cifra
+        checkDouble(myData){
+            myData = myData.toString();
+            if (myData.length < 2){
+                myData = "0" + myData;
+            }
+            return myData
+        },
+        sendMessage(){ 
             if(this.newMessage.trim().length > 0){
                this.contacts[this.activeContact].messages.push({
                 date: this.createDate(),
@@ -226,6 +234,7 @@ createApp({
                 }
             }
         },
+        //funzione che mi permette di visualizzare l'opzione delete
         activeOption(index){
             this.showOption = [];
             for (let j = 0; j < this.contacts[this.activeContact].messages.length; j++) {
@@ -233,13 +242,16 @@ createApp({
             }
             this.showOption[index] = true;
         },
+        //cancello il messaggio dall'array
         deleteMessage(index){
             this.contacts[this.activeContact].messages.splice(index, 1)
         },
+        //estrapolo l'ultimo messaggio del contatto da vedere in rubrica
         lastMessage(index){
             const lastObjMessage = this.contacts[index].messages[this.contacts[index].messages.length - 1];
             return lastObjMessage.message
         },
+        //estrapolo e gestisco l'ora da visualizzare in rubrica dell'ultimo messaggio del contatto
         timeLastMessage(index){
             //salvataggio ultimo messaggio 
             const lastObjMessage = this.contacts[index].messages[this.contacts[index].messages.length - 1];

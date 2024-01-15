@@ -61,6 +61,7 @@ main{
     height: calc(100vh - 150px);
     position: relative;
     background-color: var(--active-color);
+    
 }
 .app{
     height:calc(100vh - 60px);
@@ -70,6 +71,7 @@ main{
     margin-top:30px;
     margin-bottom:30px;
     transform:translateX(-50%);
+    
 }
 
 .header-app{
